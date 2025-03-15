@@ -113,5 +113,5 @@ def BambuBusReadPacket(_in):
         else:
             ret = BambuBusLPHandler(_in)
     if ret == 0:
-        print(BambuBusPkt)
+        print(list(map(hex, BambuBusPkt)))
         BambuBusClearVariables()

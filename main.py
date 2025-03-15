@@ -12,5 +12,4 @@ ser = serial.Serial(port='/dev/ttyUSB0',baudrate =1228800, parity=serial.PARITY_
 if __name__ == "__main__":
     while True:
         strs = int.from_bytes(ser.read())
-        print("0x%02X " % strs)
         BambuBusReadPacket(strs)
