@@ -12,6 +12,11 @@ BBP_SPKT_IDX_CRC8 = 3
 BBP_SPKT_IDX_TYPE = 4
 BBP_SPKT_IDX_CONTENT=5
 
+BAMBU_FLAG_SET = {
+    0: "RES",
+    5: "REQ",
+}
+
 BAMBU_DEVICE_SET = {
     3: "MC",
     6: "AP",
@@ -30,6 +35,7 @@ BAMBU_CMD_SET = {
     (1, 6): "mcu_upgrade",
     (1, 8): "mcu_hms",
     (1, 9): "factory_reset",
+    (2, 4): "get ams serial",
     (2, 5): "gcode_execute_state",
     (2, 6): "gcode_request", # no official name for this
     (2, 9): "mcu_display_message",
@@ -48,7 +54,7 @@ BAMBU_CMD_SET = {
     (2, 34): "extrusion_result_update",
     (2, 36): "fila_ams_get",
     (2, 37): "mc_get_skipped_obj_list",
-    (3, 1): "M971 - Capture image",
+    (3, 1): "ams version and name",
     (3, 2): "M972 - check scanner clarity",
     (3, 5): "M963",
     (3, 7): "M969",

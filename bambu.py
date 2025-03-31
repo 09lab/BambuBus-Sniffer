@@ -97,9 +97,9 @@ def BambuBusLPHandler(_in):
         BambuBusCmdSet = BambuBusData[2]
         BambuBusCmdId = BambuBusData[3]
 
-        strs = f"Flag : {BambuBusPkt[1]} | Sequence : {BambuBusPkt[2] | BambuBusPkt[3] << 8} | "
-        strs = strs + f"[{BAMBU_DEVICE_SET.get((BambuBusSourceAddr),f"Unknown")}({hex(BambuBusSourceAddr)})"
-        strs = strs + f"-> {BAMBU_DEVICE_SET.get((BambuBusTargetAddr),f"Unknwon")}({hex(BambuBusTargetAddr)})] : "
+        strs = f"Flag : {BAMBU_FLAG_SET.get((BambuBusPkt[1]),'Unknown')}({BambuBusPkt[1]}) | Sequence : {BambuBusPkt[2] | BambuBusPkt[3] << 8} | "
+        strs = strs + f"[{BAMBU_DEVICE_SET.get((BambuBusSourceAddr),'Unknown')}({hex(BambuBusSourceAddr)})"
+        strs = strs + f"-> {BAMBU_DEVICE_SET.get((BambuBusTargetAddr),'Unknwon')}({hex(BambuBusTargetAddr)})] : "
         strs = strs + f"({BambuBusCmdSet}, {BambuBusCmdId}) : "
         strs = strs + f"{BAMBU_CMD_SET.get((BambuBusCmdSet, BambuBusCmdId), 'Unknown')} | Data : {list(map(hex,BambuBusData))}"
         print(strs)
