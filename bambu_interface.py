@@ -36,7 +36,7 @@ class BambuSerial(BambuInterface):
     def getMessage(self):
         ret = self._readBambuBusFromSerial()
         
-        return parseBambuBus(self.bambuPkt)
+        return (ret, parseBambuBus(self.bambuPkt))
     
     def _readBambuBusFromSerial(self):
         ret = 1
