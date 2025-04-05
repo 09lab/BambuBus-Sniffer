@@ -24,7 +24,7 @@ class BambuSerial(BambuInterface):
         self.bambuPkt = []
 
     def open(self):
-        self.serialDev = serial.Serial(port=self.devName,baudrate =1228800, parity=serial.PARITY_EVEN, timeout=1)
+        self.serialDev = serial.Serial(port=self.devName,baudrate=1228800, parity=serial.PARITY_EVEN, timeout=1)
         
     def close(self):
         if self.serialDev:
@@ -36,7 +36,7 @@ class BambuSerial(BambuInterface):
     def getMessage(self):
         ret = self._readBambuBusFromSerial()
         
-        return (ret, parseBambuBus(self.bambuPkt))
+        return (ret, self.bambuPkt) #(ret, parseBambuBus(self.bambuPkt))
     
     def _readBambuBusFromSerial(self):
         ret = 1

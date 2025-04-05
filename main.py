@@ -6,10 +6,14 @@ import serial
 import os
 from common import * 
 from bambu import *
+from bambu_interface import *
 
-ser = serial.Serial(port='/dev/ttyUSB0',baudrate =1228800, parity=serial.PARITY_EVEN, timeout=1)
+devName = '/dev/ttyUSB0'
+bambuSerial = BambuSerial(devName)
 
 if __name__ == "__main__":
     while True:
-        strs = int.from_bytes(ser.read())
-        BambuBusReadPacket(strs)
+        (ret, pkt) = bambuSerial.getMessage()
+        print("ret = {ret} / pkt : {pkt}")
+        #strs = int.from_bytes(ser.read())
+        #BambuBusReadPacket(strs)
