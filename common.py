@@ -17,6 +17,15 @@ BAMBU_FLAG_SET = {
     5: "REQ",
 }
 
+BAMBU_SHRT_PKT_TYPE = {
+    3: "Read fila mvnt info",
+    4: "Read and change AMS status",
+    5: "Verify device online",
+    6: "Unknown-6",
+    7: "Read NFC info",
+    32: "Heartbeat",
+}
+
 BAMBU_DEVICE_SET = {
     3: "MC",
     6: "AP",

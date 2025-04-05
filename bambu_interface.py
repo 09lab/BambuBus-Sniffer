@@ -55,7 +55,7 @@ class BambuSerial(BambuInterface):
             # Store totalLength 1 byte
             r = int.from_bytes(self.serialDev.read())
             self.bambuPkt.append(r)
-            totalLength = r
+            totalLength = r-3
 
             # Long Header Packet
             if f < 0x80:
@@ -63,7 +63,6 @@ class BambuSerial(BambuInterface):
                 r = int.from_bytes(self.serialDev.read())
                 self.bambuPkt.append(r)
                 totalLength = totalLength + (r << 8)
-                
             while totalLength != 0:
                 r = int.from_bytes(self.serialDev.read())
                 self.bambuPkt.append(r)

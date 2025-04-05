@@ -55,6 +55,17 @@ def BambuBusSPHandler(_in):
 
     BambuBusIndex = BambuBusIndex + 1
 
+    if ret == 0:
+        if (BambuBusPkt[1] & 5) == 5:
+            strs = "[REQ] "
+        else:
+            strs = "[RES] "
+        strs = strs + f"Flag & Seq : {hex(BambuBusPkt[1])} | Total Length : {BambuBusPkt[2]} | "
+        strs = strs + f"PacketType : {BAMBU_SHRT_PKT_TYPE.get((BambuBusPkt[4]),'Unknown')} | "
+        strs = strs + f"Length : {len(BambuBusData)} / PacketData : {list(map(hex,BambuBusData))}"
+
+        print(strs)
+
     return ret
 
 def BambuBusLPHandler(_in):
@@ -96,7 +107,7 @@ def BambuBusLPHandler(_in):
     if ret == 0:
         BambuBusCmdSet = BambuBusData[2]
         BambuBusCmdId = BambuBusData[3]
-
+        
         strs = f"Flag : {BAMBU_FLAG_SET.get((BambuBusPkt[1]),'Unknown')}({BambuBusPkt[1]}) | Sequence : {BambuBusPkt[2] | BambuBusPkt[3] << 8} | "
         strs = strs + f"[{BAMBU_DEVICE_SET.get((BambuBusSourceAddr),'Unknown')}({hex(BambuBusSourceAddr)})"
         strs = strs + f"-> {BAMBU_DEVICE_SET.get((BambuBusTargetAddr),'Unknwon')}({hex(BambuBusTargetAddr)})] : "
