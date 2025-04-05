@@ -10,4 +10,15 @@ class BambuShortHdrPkt:
     bbType:np.uint8 = 0
     bbData:list[np.uint8]
     bbCrc16:np.uint16 = 0
-    
+
+@dataclass
+class BambuLongHdrPkt:
+    bbStx:np.uint8 = 0x3D
+    bbFlag:np.uint8 = 0
+    bbPktSeq:np.uint16 = 0
+    bbTLength:np.uint16 = 0
+    bbCrc8:np.uint8 = 0
+    bbTargetAddr:np.uint16 = 0
+    bbSourceAddr:np.uint16 = 0
+    bbData:list[np.uint8]
+    bbCrc16:np.uint16 = 0
