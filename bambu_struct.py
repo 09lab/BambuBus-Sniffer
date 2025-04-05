@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import numpy as np
 
 @dataclass
@@ -8,7 +8,7 @@ class BambuShortHdrPkt:
     bbTLength:np.uint8 = 0
     bbCrc8:np.uint8 = 0
     bbType:np.uint8 = 0
-    bbData:list[np.uint8]
+    bbData:list[np.uint8] = field(default_factory=list)
     bbCrc16:np.uint16 = 0
 
 @dataclass
@@ -20,5 +20,5 @@ class BambuLongHdrPkt:
     bbCrc8:np.uint8 = 0
     bbTargetAddr:np.uint16 = 0
     bbSourceAddr:np.uint16 = 0
-    bbData:list[np.uint8]
+    bbData:list[np.uint8] = field(default_factory=list)
     bbCrc16:np.uint16 = 0

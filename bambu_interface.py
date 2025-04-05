@@ -4,7 +4,7 @@ from bambu_struct import *
 
 def parseBambuBus(pkt):
     ret = None
-
+    print(f"(origin : {pkt})")
     if pkt[BBP_PKT_IDX_FLAG] > 0x80:
         bbpFlag = pkt[BBP_PKT_IDX_FLAG]
         bbpLength = pkt[BBP_SPKT_IDX_LENGTH]
@@ -82,21 +82,32 @@ class BambuSerial(BambuInterface):
             f = int.from_bytes(self.serialDev.read())
             self.bambuPkt.append(f)
 
-            # Store totalLength 1 byte
-            r = int.from_bytes(self.serialDev.read())
-            self.bambuPkt.append(r)
-            totalLength = r-3
-
             # Long Header Packet
             if f < 0x80:
-                # Store totalLength 1 more byte
+                # Packet Sequence
+                r = int.from_bytes(self.serialDev.read())
+                self.bambuPkt.append(r)
+                r = int.from_bytes(self.serialDev.read())
+                self.bambuPkt.append(r)
+
+                # totalLength 2 byte
+                r = int.from_bytes(self.serialDev.read())
+                self.bambuPkt.append(r)
+                totalLength = r - 6
+                
                 r = int.from_bytes(self.serialDev.read())
                 self.bambuPkt.append(r)
                 totalLength = totalLength + (r << 8)
-            while totalLength != 0:
+            # Short Header Packet
+            else:
                 r = int.from_bytes(self.serialDev.read())
                 self.bambuPkt.append(r)
-                totalLength = totalLength - 1
+                totalLength = r - 3
+
+            for i in range(0, totalLength):
+                r = int.from_bytes(self.serialDev.read())
+                self.bambuPkt.append(r)
+                #totalLength = totalLength - 1
 
             ret = 0
         else:
